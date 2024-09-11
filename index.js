@@ -1,3 +1,5 @@
+const userClickedPattern = [];
+
 const gamePattern = [];
 
 const buttonColours = ["red", "blue", "green", "yellow"];
@@ -24,12 +26,26 @@ function nextSequence() {
         playSound(randomChosenColour);
     };
 
-    function playSound(colour) {
+
+// Detect button clicks
+$(document).ready(function() {
+    $(".btn").click(function() {
+        const userChosenColour = $(this).attr("id");
+        console.log("Button clicked:", userChosenColour);
+
+userClickedPattern.push(userChosenColour);
+console.log("Pattern:", userClickedPattern);
+
+playSound(userChosenColour);
+    });
+});
+
+// Sound function
+function playSound(name) {
+    var colour = name;
+    userChosenColour = name;
         const audio = new Audio("./sounds/" + colour + ".mp3");
         
         audio.play();
-    }
+}
 
-
-//     var audio = new Audio('audio_file.mp3');
-// audio.play();
