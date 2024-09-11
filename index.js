@@ -37,6 +37,7 @@ userClickedPattern.push(userChosenColour);
 console.log("Pattern:", userClickedPattern);
 
 playSound(userChosenColour);
+animatePress(userChosenColour);
     });
 });
 
@@ -49,3 +50,11 @@ function playSound(name) {
         audio.play();
 }
 
+function animatePress(currentColour) {
+    userChosenColour = currentColour;
+    $("#" + currentColour).addClass("pressed");
+    
+    setTimeout(function() {
+        $("#" + currentColour).removeClass("pressed");
+    }, 100);
+};
