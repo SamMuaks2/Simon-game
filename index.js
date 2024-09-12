@@ -1,10 +1,26 @@
-const userClickedPattern = [];
+const buttonColours = ["red", "blue", "green", "yellow"];
 
 const gamePattern = [];
 
-const buttonColours = ["red", "blue", "green", "yellow"];
+const userClickedPattern = [];
+
+var started = false;
+
+var level = 0;
+
+    $(document).keydown(function() {
+            $("#level-title").text("Level" + level);
+            nextSequence();
+            started = true;
+    });
 
 function nextSequence() {
+    // Increase game level
+    level++;
+
+    $("#level-title").text("Level " + level);
+
+
     // Generate a random number
     const randomNumber = Math.floor(Math.random() * 4);
 
@@ -39,6 +55,8 @@ console.log("Pattern:", userClickedPattern);
 playSound(userChosenColour);
 animatePress(userChosenColour);
     });
+
+    checkAnswer(userClickedPattern.length - 1);
 });
 
 // Sound function
@@ -58,3 +76,35 @@ function animatePress(currentColour) {
         $("#" + currentColour).removeClass("pressed");
     }, 100);
 };
+
+function checkAnswer(currentLevel) {
+    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
+
+        console.log("Success");
+
+        if (userClickedPattern.length === gamePattern.length) {
+            setTimeout(function() {
+                nextSequence;
+            }, 1000);
+        };
+
+        else {
+            console.log("Wrong!")
+           
+            playSound("Wrong")
+           
+            $("body").addClass("game-over");
+            $("#level-title").text("Game Over, Press Any Key to Restart");
+    
+            setTimeout(function () {
+                $("body").removeClass("game-over");
+            }, 200);
+    
+            // Reset game variables
+            startOver();
+        }
+            // $("h1").text("Game Over 🌚😂");
+            // level = 0;
+        }
+    };
+}
