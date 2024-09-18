@@ -75,7 +75,7 @@ checkAnswer(userClickedPattern.length - 1);
             
         };
         
-       function nextSequence() {
+function nextSequence() {
     userClickedPattern = [];
 
     // Increase game level
@@ -95,6 +95,7 @@ checkAnswer(userClickedPattern.length - 1);
     
         console.log("Colour:", randomChosenColour);
     
+        playSound(randomChosenColour);
         gamePattern.push(randomChosenColour);
     
         console.log("pattern:", gamePattern);
@@ -102,7 +103,6 @@ checkAnswer(userClickedPattern.length - 1);
         // Use the colour as an id to select the button randomly and play its sound
         $("#" + randomChosenColour).effect("pulsate", { times:2 }, 1000);
 
-        playSound(randomChosenColour);
 
         userClickedPattern.length = 0;
     };
