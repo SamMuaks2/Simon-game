@@ -1,8 +1,8 @@
 const buttonColours = ["red", "blue", "green", "yellow"];
 
-const gamePattern = [];
+var gamePattern = [];
 
-const userClickedPattern = [];
+var userClickedPattern = [];
 
 var started = false;
 
@@ -37,13 +37,13 @@ checkAnswer(userClickedPattern.length - 1);
 
 
     function checkAnswer(currentLevel) {
-        if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
+        if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
     
             console.log("Success");
     
             if (userClickedPattern.length === gamePattern.length) {
                 setTimeout(function() {
-                    nextSequence;
+                    nextSequence();
                 }, 1000);
             };
         }
@@ -66,14 +66,9 @@ checkAnswer(userClickedPattern.length - 1);
             
         };
         
-        function startOver() {
-            level = 0;
-            gamePattern.length = 0;
-            started = false;
-        }
-    
+       function nextSequence() {
+    userClickedPattern = [];
 
-function nextSequence() {
     // Increase game level
     level++;
 
@@ -108,7 +103,7 @@ function nextSequence() {
 function playSound(name) {
     var colour = name;
     userChosenColour = name;
-        const audio = new Audio("./sounds/" + colour + ".mp3");
+        const audio = new Audio("./sounds/" + name + ".mp3");
         
         audio.play();
 }
@@ -121,5 +116,12 @@ function animatePress(currentColour) {
         $("#" + currentColour).removeClass("pressed");
     }, 100);
 };
+
+
+function startOver() {
+    level = 0;
+    gamePattern = [];
+    started = false;
+}
 
 
