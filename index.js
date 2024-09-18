@@ -16,6 +16,15 @@ var level = 0;
             started = true;
         }
     });
+    
+    $(document).on("touchstart", function() {
+        if(!started) {
+
+            $("#level-title").text("Level" + level);
+            nextSequence();
+            started = true;
+        }
+    });
 
 // Detect button clicks
 $(document).ready(function() {
